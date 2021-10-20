@@ -1,0 +1,19 @@
+
+version: 2.1
+
+orbs:
+  newman: postman/newman@0.0.2
+
+jobs:
+  simple-kart-tests:
+    executor: newman/postman-newman-docker
+    steps:
+      - checkout
+      - newman/newman-run:
+          collection: https://api.getpostman.com/collections/10237495-e4f12186-f6d2-4516-80c8-d737c4d402cf?apikey=PMAK-61703415fe0140003c783946-68ebeb8b72bf2837cfa88a1f881f51a0b4 
+          environment: https://api.getpostman.com/environments/b9409f0b-70ff-445e-bbbe-649eeb05dc07?apikey=PMAK-61703415fe0140003c783946-68ebeb8b72bf2837cfa88a1f881f51a0b4 
+
+workflows:
+  example-workflow:
+    jobs:
+      - simple-kart-tests
