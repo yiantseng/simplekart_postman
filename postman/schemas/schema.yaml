@@ -167,8 +167,8 @@
                   }
                }
             },
-            "operationId": "get-items-itemId",
-            "description": "Obtain item details from item database",
+            "operationId": "add-items-itemId",
+            "description": "add items to cart",
             "parameters": []
          }
       },

@@ -16,12 +16,11 @@
                             "listen": "test",
                             "script": {
                                 "id": "9aec27b1-4418-415c-af83-fa283f6880ae",
-                                "type": "text/javascript",
                                 "exec": [
                                     "var jsonData = pm.response.json();",
                                     "",
                                     "pm.test(\"status code should be 200\", function () {",
-                                    "    pm.response.to.have.status(400);",
+                                    "    pm.response.to.have.status(200);",
                                     "});",
                                     "",
                                     "pm.test(\"Response time is less than 200ms\", function () {",
@@ -64,18 +63,24 @@
                                     "    postman.setNextRequest(null);",
                                     "}",
                                     "",
+                                    "pm.test(\"itemId is valid\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.itemId).to.eql(100);",
+                                    "});",
+                                    "",
                                     ""
-                                ]
+                                ],
+                                "type": "text/javascript"
                             }
                         },
                         {
                             "listen": "prerequest",
                             "script": {
                                 "id": "55ea9c6f-6869-4771-ba5a-5fa170684c1b",
-                                "type": "text/javascript",
                                 "exec": [
                                     ""
-                                ]
+                                ],
+                                "type": "text/javascript"
                             }
                         }
                     ],
@@ -100,11 +105,11 @@
                             ],
                             "variable": [
                                 {
+                                    "id": "30a66dec-4165-4be4-91cc-e7c1dce5d19b",
                                     "key": "itemId",
                                     "value": "1657",
-                                    "description": "(Required) Id of the item to pull details of",
-                                    "id": "30a66dec-4165-4be4-91cc-e7c1dce5d19b",
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "(Required) Id of the item to pull details of"
                                 }
                             ]
                         },
@@ -570,7 +575,7 @@
                 {
                     "listen": "test",
                     "script": {
-                        "id": "81644d87-796b-4805-afff-e403062b8ec8",
+                        "id": "0c2e6048-90fe-449f-98c4-6a482b941be3",
                         "exec": [
                             "pm.test(\"Status code is 200\", function () {",
                             "    pm.response.to.have.status(200);",
@@ -585,17 +590,27 @@
                     }
                 }
             ],
-            "id": "2c3c30da-57b7-47ca-ab9d-68ecb63d1ba9",
+            "id": "77dca0aa-cdd5-4867-a60e-37cf1a46f667",
             "protocolProfileBehavior": {
                 "disableBodyPruning": true
             },
             "request": {
                 "method": "POST",
-                "header": [],
+                "header": [
+                    {
+                        "key": "x-mock-response-code",
+                        "value": "200",
+                        "type": "text"
+                    }
+                ],
                 "url": {
-                    "raw": "{{baseUrl}}/items/:itemId",
+                    "raw": "https://ebc5b67e-605a-4b0c-8d20-2cf6c1c2473f.mock.pstmn.io/items/:itemId",
+                    "protocol": "https",
                     "host": [
-                        "{{baseUrl}}"
+                        "ebc5b67e-605a-4b0c-8d20-2cf6c1c2473f",
+                        "mock",
+                        "pstmn",
+                        "io"
                     ],
                     "path": [
                         "items",
@@ -603,26 +618,31 @@
                     ],
                     "variable": [
                         {
-                            "id": "7852a81a-720e-4a84-bb07-54309b68509f",
+                            "id": "e615666c-0370-4926-aec7-4b3b5f2f7295",
                             "key": "itemId",
-                            "value": "6290",
+                            "value": "317",
+                            "type": "any",
                             "description": "(Required) Id of the item to pull details of"
                         }
                     ]
                 },
-                "description": "Obtain item details from item database"
+                "description": "add items to cart"
             },
             "response": [
                 {
-                    "id": "81f9adb5-bbc6-41da-9b62-fc8bfc4c8549",
+                    "id": "84dff758-1a81-418b-b3de-4b51927b7941",
                     "name": "OK - Successfully added order to cart",
                     "originalRequest": {
                         "method": "POST",
                         "header": [],
                         "url": {
-                            "raw": "{{baseUrl}}/items/:itemId",
+                            "raw": "https://ebc5b67e-605a-4b0c-8d20-2cf6c1c2473f.mock.pstmn.io/items/:itemId",
+                            "protocol": "https",
                             "host": [
-                                "{{baseUrl}}"
+                                "ebc5b67e-605a-4b0c-8d20-2cf6c1c2473f",
+                                "mock",
+                                "pstmn",
+                                "io"
                             ],
                             "path": [
                                 "items",
@@ -649,7 +669,7 @@
                     "body": "{\n \"itemId\": 1657,\n \"name\": \"Smart WiFi Router\",\n \"price\": 2096,\n \"description\": \"Wifi router/wireless router. One of routers for wireless internet, wireless routers for home. Dual band router and gigabit router. Ideal as internet router also gaming router. Long range coverage with high speed. Compatible with all 802.11ac devices and below. 5ghz router/5g router Frequency Range: 2.4GHz and 5GHz; Interface Available: 4 x 10/100/1000Mbps LAN Ports, 1 10/100/1000Mbps WAN Port, 1 USB 2.0 Ports; Protocols Supported: Supports IPv4 and IPv6; System Requirement: Microsoft Windows 98SE NT 2000 XP Vista, or Windows 7 Windows 8/8.1/10, MAC OS NetWare UNIX or Linux; Wireless Standards: IEEE 802.11ac/n/a 5GHz, IEEE 802.11b/g/n 2.4GH\",\n \"quantitiy\": 1\n}"
                 },
                 {
-                    "id": "d3c901c3-960b-457b-bbf6-fab6f888df63",
+                    "id": "28f92ab9-f7ec-4e3e-b56b-35c83f765a90",
                     "name": "Bad Request - Invalid item ID supplied",
                     "originalRequest": {
                         "method": "POST",
@@ -684,7 +704,7 @@
                     "body": "{\n \"error\": {\n  \"message\": \"Provided Id is invalid\"\n }\n}"
                 },
                 {
-                    "id": "881f1221-63e8-4371-8ad3-fcd18e170133",
+                    "id": "d67ec49e-539e-4882-b1cb-0419047e4d2d",
                     "name": "Not Found - Item not found",
                     "originalRequest": {
                         "method": "POST",
@@ -717,6 +737,15 @@
                     "cookie": [],
                     "responseTime": null,
                     "body": "{\n \"error\": {\n  \"message\": \"The item you are looking for, does not exist\"\n }\n}"
+                }
+            ],
+            "variable": [
+                {
+                    "id": "e615666c-0370-4926-aec7-4b3b5f2f7295",
+                    "key": "itemId",
+                    "value": "317",
+                    "type": "any",
+                    "description": "(Required) Id of the item to pull details of"
                 }
             ]
         }
